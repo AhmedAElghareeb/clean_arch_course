@@ -1,6 +1,21 @@
+import 'package:clean_arch_course/weather/data/data_source/remote_datasource.dart';
+import 'package:clean_arch_course/weather/data/repos/weather_reposs.dart';
+import 'package:clean_arch_course/weather/domain/entities/weather.dart';
+import 'package:clean_arch_course/weather/domain/reposs/base_weather_repo.dart';
+import 'package:clean_arch_course/weather/domain/usecases/get_weather_by_country.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+void main() async {
+  BaseRemoteDataSource baseRemoteDataSource = RemoteDataSource();
+  BaseWeatherRepo baseWeatherRepo = WeatherRepository(
+    baseRemoteDataSource,
+  );
+  Weather weather = await GetWeatherByCountryName(baseWeatherRepo).execute(
+    "London",
+  );
+  print(
+    weather,
+  );
   runApp(const MyApp());
 }
 
