@@ -11,7 +11,7 @@ void main() async {
     baseRemoteDataSource,
   );
   Weather weather = await GetWeatherByCountryName(baseWeatherRepo).execute(
-    "London",
+    "egypt",
   );
   print(
     weather,
