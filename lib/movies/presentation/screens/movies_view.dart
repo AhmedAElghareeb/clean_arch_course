@@ -29,6 +29,6 @@ class _MoviesViewState extends State<MoviesView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return const Scaffold();
   }
 }
