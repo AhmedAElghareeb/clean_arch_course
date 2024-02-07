@@ -1,5 +1,8 @@
 import 'package:clean_arch_course/movies/domain/entities/movie.dart';
 import 'package:clean_arch_course/movies/domain/reposs/base_movies_repository.dart';
+import 'package:dartz/dartz.dart';
+
+import '../../../core/error/failure.dart';
 
 class GetPopularMoviesUseCase {
   //injection
@@ -7,7 +10,7 @@ class GetPopularMoviesUseCase {
 
   GetPopularMoviesUseCase(this.baseMoviesRepository);
 
-  Future<List<Movie>> execute () async{
+  Future<Either<Failure, List<Movie>>> execute () async{
     return await baseMoviesRepository.getPopularMovies();
   }
 }
