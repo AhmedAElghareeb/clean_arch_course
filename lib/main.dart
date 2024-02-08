@@ -1,7 +1,7 @@
 import 'package:clean_arch_course/core/services/services_locator.dart';
 import 'package:flutter/material.dart';
+import 'movies/presentation/screens/movie_screen.dart';
 
-import 'movies/presentation/screens/movies_view.dart';
 
 void main() {
   ServiceLocator().init();
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Movies App',
-      home: MoviesView(),
+      home: MovieView(),
     );
   }
 }

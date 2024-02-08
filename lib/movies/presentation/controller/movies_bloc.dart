@@ -24,7 +24,8 @@ class MoviesBloc extends Bloc<MoviesEvents, MoviesStates> {
                   nowPlayingMovies: r,
                   nowPlayingState: RequestState.loaded,
                 ),
-              ));
+              ),
+      );
     });
   }
 }
