@@ -9,7 +9,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../../core/services/services_locator.dart';
 import '../../domain/entities/genres.dart';
-import 'dummy.dart';
 
 class MovieDetailScreen extends StatelessWidget {
   final int id;
@@ -276,7 +275,7 @@ class MovieDetailContent extends StatelessWidget {
                 ),
               );
             },
-            childCount: recommendationDummy.length,
+            childCount: state.recommendationList.length,
           ),
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             mainAxisSpacing: 8.0,
