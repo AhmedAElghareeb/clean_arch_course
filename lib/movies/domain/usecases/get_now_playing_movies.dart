@@ -5,7 +5,7 @@ import 'package:dartz/dartz.dart';
 
 import '../../../core/error/failure.dart';
 
-class GetNowPlayingMoviesUseCase extends BaseUseCase<List<Movie>>{
+class GetNowPlayingMoviesUseCase extends BaseUseCase<List<Movie>, NoParameters>{
   //injection
   final BaseMoviesRepository baseMoviesRepository;
 
@@ -13,7 +13,7 @@ class GetNowPlayingMoviesUseCase extends BaseUseCase<List<Movie>>{
 
   //call refer to callable method
   @override
-  Future<Either<Failure, List<Movie>>> call() async{
+  Future<Either<Failure, List<Movie>>> call(NoParameters parameters) async{
     return await baseMoviesRepository.getNowPlayingMovies();
   }
 }

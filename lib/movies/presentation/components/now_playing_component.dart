@@ -4,6 +4,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:clean_arch_course/core/utils/enums.dart';
 import 'package:clean_arch_course/movies/presentation/controller/movies_bloc.dart';
 import 'package:clean_arch_course/movies/presentation/controller/movies_states.dart';
+import 'package:clean_arch_course/movies/presentation/screens/movie_detail_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../core/utils/constants.dart';
@@ -14,11 +15,18 @@ class NowPlayingComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<MoviesBloc, MoviesStates>(
-      buildWhen: (previous, current) => previous.nowPlayingState != current.nowPlayingState,
+      buildWhen: (previous, current) =>
+          previous.nowPlayingState != current.nowPlayingState,
       builder: (context, state) {
-        switch(state.nowPlayingState) {
+        switch (state.nowPlayingState) {
           case RequestState.loading:
-            return const SizedBox(height: 400,child: Center(child: CircularProgressIndicator(color: Colors.white,),));
+            return const SizedBox(
+                height: 400,
+                child: Center(
+                  child: CircularProgressIndicator(
+                    color: Colors.white,
+                  ),
+                ));
           case RequestState.loaded:
             return FadeIn(
               duration: const Duration(milliseconds: 500),
@@ -29,11 +37,18 @@ class NowPlayingComponent extends StatelessWidget {
                   onPageChanged: (index, reason) {},
                 ),
                 items: state.nowPlayingMovies.map(
-                      (item) {
+                  (item) {
                     return GestureDetector(
                       key: const Key('openMovieMinimalDetail'),
                       onTap: () {
-                        /// TODO : NAVIGATE TO MOVIE DETAILS
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => MovieDetailScreen(
+                              id: item.id,
+                            ),
+                          ),
+                        );
                       },
                       child: Stack(
                         children: [
@@ -58,7 +73,7 @@ class NowPlayingComponent extends StatelessWidget {
                             child: CachedNetworkImage(
                               height: 560.0,
                               imageUrl:
-                              AppConstants.imageUrl(item.backdropPath),
+                                  AppConstants.imageUrl(item.backdropPath),
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -82,8 +97,7 @@ class NowPlayingComponent extends StatelessWidget {
                                         'Now Playing'.toUpperCase(),
                                         style: const TextStyle(
                                             fontSize: 16.0,
-                                            color: Colors.white
-                                        ),
+                                            color: Colors.white),
                                       ),
                                     ],
                                   ),
@@ -94,9 +108,7 @@ class NowPlayingComponent extends StatelessWidget {
                                     item.title,
                                     textAlign: TextAlign.center,
                                     style: const TextStyle(
-                                        fontSize: 24,
-                                        color: Colors.white
-                                    ),
+                                        fontSize: 24, color: Colors.white),
                                   ),
                                 ),
                               ],
@@ -112,7 +124,9 @@ class NowPlayingComponent extends StatelessWidget {
           case RequestState.error:
             return SizedBox(
               height: 400,
-              child: Text(state.nowPlayingMsg,),
+              child: Text(
+                state.nowPlayingMsg,
+              ),
             );
         }
       },
